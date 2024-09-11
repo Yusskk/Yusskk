@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>折线图</title>
+    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js"></script>
+    <style type="text/css">      
+      html, body, #container { 
+        width: 90%; height: 90%; margin: 0; padding: 0; 
+      } 
+    </style>
+  </head>
+  <body>  
+    <div id="container"></div>
+    <script>
+      anychart.onDocumentReady(function () {
+  
+        // 添加数据
+        var data = [
+          ["Mon", 22, 5, 25],
+          ["Tue", 12, 0, 16],
+          ["Wed", 6, 1, 14],
+          ["Thu", 6, 1, 17],
+          ["Fri", 15, 3, 19],
+          ["Sat", 16, 1, 20],
+          ["Sun", 11, 3, 16],
+        ];
+        // 创建数据集
+        var dataSet = anychart.data.set(data);
+        // 映射所有数据到系列
+        var firstSeriesData = dataSet.mapAs({x: 0, value: 1});
+        var secondSeriesData = dataSet.mapAs({x: 0, value: 2});
+        var thirdSeriesData = dataSet.mapAs({x: 0, value: 3});
+        // 创建折线图
+        var chart = anychart.line();
+        // 创建系列及命名
+        var firstSeries = chart.line(firstSeriesData);
+        firstSeries.name("Highest");
+        var secondSeries = chart.line(secondSeriesData);
+        secondSeries.name("Lowest");
+        var thirdSeries = chart.line(thirdSeriesData);
+        thirdSeries.name("PM2.5");
+        // 添加图标
+        chart.legend().enabled(true);
+        // 添加标题
+        chart.title("一周气温变化及PM2.5指数");
+        // 设置在哪里展现折线图
+        chart.container("container");
+        // 绘制折线图
+        chart.draw();
+      });
+    </script>
+  </body>
+</html>
